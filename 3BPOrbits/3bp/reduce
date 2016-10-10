@@ -1,0 +1,21 @@
+reduce := proc(a) local p,P,S,c,i,j,f;
+   if type(a,{name,constant}) then a
+   elif type(a,`+`) then p := a; P := convert(p,list); 
+      S := map(t -> if (type(t,`^`) and type(op(2,t),even)) 
+                    then op(1,t)^(op(2,t)/2) fi, P);
+      for i to nops(S) do
+         for j from i+1 to nops(S) do
+            if   has(p, 2*S[i]*S[j]) then 
+               p := p - (S[i]^2+2*S[i]*S[j]+S[j]^2) 
+                      + (S[i]+S[j])^2
+            elif has(p,-2*S[i]*S[j]) then 
+               p := p - (S[i]^2-2*S[i]*S[j]+S[j]^2) 
+                      + (S[i]-S[j])^2
+            fi
+         od;
+      od; 
+      p
+   else map(reduce, a)
+   fi
+end:
+

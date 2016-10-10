@@ -1,0 +1,28 @@
+K := proc(x1,x2,y1,y2,p1,p2,q1,q2)
+   local xx,yy,pp,qq,r0,r1,r2,
+         A,B,L0,L1,L2,m01,m12,m20,apb,amb;
+
+   xx:=x1^2+x2^2; yy:=y1^2+y2^2;
+   pp:=p1^2+p2^2; qq:=q1^2+q2^2;
+
+   r0:=xx*yy;
+   r1:=((x1-y2)^2+(x2+y1)^2)*((x1+y2)^2+(x2-y1)^2)/4;
+   r2:=((x1+y1)^2+(x2+y2)^2)*((x1-y1)^2+(x2-y2)^2)/4;
+
+   A:=2*(p1*q1+p2*q2)*(x1*y1+x2*y2);
+   B:=2*(p2*q1-p1*q2)*(x2*y1-x1*y2);
+
+   apb:=A+B:
+   amb:=A-B:
+   L0:=r0*(pp*xx+qq*yy-apb);
+   L1:=r1*(pp*yy+qq*xx-amb);
+   L2:=r2*(pp*yy+qq*xx+amb);
+
+   m01 := m0*m1;
+   m12 := m1*m2;
+   m20 := m2*m0;
+
+   L0/32/m0+L1/32/m1+L2/32/m2-m01*r0*r1-m12*r1*r2-m20*r2*r0
+      -EE*r0*r1*r2;
+end:
+
