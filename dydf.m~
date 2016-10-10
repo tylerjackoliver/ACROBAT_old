@@ -12,7 +12,7 @@ global mu ep
 r1 = y(1);
 dr1 = y(2);
 r2 = y(3);
-dr2 = y(4);
+dr2 = y(4);z
 theta1 = y(5);
 dtheta1 = y(6);
 theta2 = y(7);
