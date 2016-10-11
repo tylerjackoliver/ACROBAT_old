@@ -6,9 +6,9 @@ function [value,isterminal,direction] = eventfunction(y,f,mu,ep)
 % b) The S/C enters a disc of radius < r_eq
 % c) The S/C exceeds its integration time.
 
-value = [y(1)-1e-005, y(3)-1e-005, 0.5*y(4)-mu/(y(3)*(1+ep*cos(f)))]; % Detect radii or Kepler energy
-isterminal = [1, 1, 1];   % Stops the integration when conditions are met
-direction = [-1, -1, 1];   % Prescribes direction of stopping conditions
+value = [y(1)-1e-005, y(3)-1e-005, 0.5*y(4)-mu/(y(3)*(1+ep*cos(f))), y(7)]; % Detect radii or Kepler energy
+isterminal = [1, 1, 1, 0];   % Stops the integration when conditions are met EXCEPT for theta2
+direction = [-1, -1, 1, 1];   % Prescribes direction of stopping conditions
 
 
 end
