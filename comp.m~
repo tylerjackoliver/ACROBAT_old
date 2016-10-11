@@ -5,7 +5,7 @@
 global mu ep mp1 mp2 distscale theta_l theta_u h_l h_u req sma f maxt
 % Unused variables -  r1 r2 theta1 theta
 
-options = odeset('RelTol',1e-8,'AbsTol',1e-9, 'Events', @eventfunction);
+options = odeset(
 
 %% Variable computation
 
