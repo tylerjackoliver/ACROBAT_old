@@ -47,7 +47,8 @@ for e = 0.95:0.01:0.99:
         for j = 1:1:10
             h_i = h_l + (i-1)*(h_u-h_l)/(10-1);
             theta_j = theta_l + (j-1)*(theta_u - theta_l)/(10-1);
-            r_i = (req+h_i)/(distscale);
+            r_i =
+            (req+h_i)/(distscale);
             y(3) = r_i; % r2
             y(7) = theta_j; % theta2
             y(4) = -r_i*ep*sin(f)/(1+ep*cos(f)); %r2'

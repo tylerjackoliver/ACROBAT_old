@@ -1,4 +1,4 @@
-function dydf,[ y, dydf ] = dydf_rhs( f, y );
+function dydf,[ y, dydf ] = dydf_rhs( f, y, ep, mu );
 %Function file for ER3BP numerical integration
 %   Magical shit, yo
 
