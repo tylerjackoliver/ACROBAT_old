@@ -20,8 +20,8 @@ f = 0; % Initial true anomaly
 maxt = 50000;
 %% Grab spatial information from ephemeris
 
-xm = mars_posx - mu;
-ym = mars_posy;
+xm = 1 - mu;
+ym = 0;
 rm = (xm^2+ym^2)^0.5;
 if xm > 0 && ym > 0,
     thetam = atan(ym/xm);
@@ -32,8 +32,8 @@ elif xm < 0 && ym > 0:
 elif xm < 0 && ym < 0:
     thetam = pi+atan(ym/xm);
 end
-
-f = thetam;
+y = zeros(8, 1, 'uint32');
+f = 0;
 
 %% Non-dimensionalise variables
 
