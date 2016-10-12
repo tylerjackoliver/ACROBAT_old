@@ -18,6 +18,11 @@ req = 3397; % Mars equatorial radius
 sma = 1.523688;
 f = 0; % Initial true anomaly
 maxt = 50000;
+h_l = 250;
+h_u = 250000;
+theta_l = 0;
+theta_u = 2*pi;
+
 %% Grab spatial information from ephemeris
 
 xm = 1 - mu;
