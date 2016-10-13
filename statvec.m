@@ -2,10 +2,6 @@ function statvec,[ y, dydf ] = dydf_rhs( f, y, ep, mu );
 %Function file for ER3BP numerical integration
 %   Magical shit, yo
 
-%% Initialise variables
-
-global mu ep 
-
 %% Set up first state matrix
 
 

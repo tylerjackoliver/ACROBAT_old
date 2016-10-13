@@ -2,7 +2,7 @@
 
 %% Initialise variables + integration options
 
-global mu ep distscale theta_l theta_u h_l h_u req sma f maxt
+global mu ep distscale theta_l theta_u h_l h_u req sma f simtime
 % Unused variables -  r1 r2 theta1 theta mp1 mp2
 
 options = odeset('RelTol',1e-8,'AbsTol',1e-9, 'Events', @eventfunction);
@@ -22,7 +22,7 @@ h_l = 250;
 h_u = 250000;
 theta_l = 0;
 theta_u = 2*pi;
-
+simtime = [0 5000];
 %% Grab spatial information from ephemeris
 
 xm = 1 - mu;
@@ -37,7 +37,7 @@ elif xm < 0 && ym > 0:
 elif xm < 0 && ym < 0:
     thetam = pi+atan(ym/xm);
 end
-y = zeros(8, 1, 'uint32');
+y = double(8);
 f = 0;
 
 %% Non-dimensionalise variables
@@ -61,10 +61,10 @@ for e = 0.95:0.01:0.99
             y(4) = -r_i*ep*sin(f)/(1+ep*cos(f)); %r2'
             y(8) = (((mu)*(1+e))/(r_i^3*(1+ep*cos(f))))^0.5-1; % theta2'
             y(1) = (r_i^2+2*r_i*cos(theta_j)+1)^0.5; % r1
-            y(5) = atan((r_i1*sin(theta_j))/((1+r_i*cos(theta_j)))); %theta1
+            y(5) = atan((r_i*sin(theta_j))/((1+r_i*cos(theta_j)))); %theta1
             y(2) = y(4)*cos(theta_j-y(5))-y(3)*y(8)*sin(theta_j-y(5)); %dr1
             y(6) = y(4)/y(1)*sin(theta_j - y(5))+y(3)*y(8)/y(1)*cos(theta_j-y(5)); %theta1'
-            [Y , dydf, te, ye, ie] = ode45(@statvec, y, input_args); % Integration + options for termination              
+            [Y , dydf, te, ye, ie] = ode45(@statvec, simtime, y); % Integration + options for termination         
         end
     end
 end
