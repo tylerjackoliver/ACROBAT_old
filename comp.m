@@ -2,15 +2,13 @@
 
 %% Initialise variables + integration options
 
-global mu ep distscale theta_l theta_u h_l h_u req sma f simtime
+global mu ep distscale theta_l theta_u h_l h_u req f simtime
 % Unused variables -  r1 r2 theta1 theta mp1 mp2
 
 options = odeset('RelTol',1e-8,'AbsTol',1e-9, 'Events', @eventfunction);
 
 %% Variable computation
 
-% mp1 = 123;  % mass of larger primary
-% mp2 = 456;  % mass of smaller primary
 mu = 3.226e-006; % mass ratio, check this
 ep = 0.0934; % try and grab this from ephemeris too
 distscale = 229.4e+006; % S-Mars distance
@@ -23,6 +21,7 @@ h_u = 250000;
 theta_l = 0;
 theta_u = 2*pi;
 simtime = [0 5000];
+
 %% Grab spatial information from ephemeris
 
 xm = 1 - mu;
@@ -31,13 +30,13 @@ rm = (xm^2+ym^2)^0.5;
 if xm > 0 && ym > 0,
     thetam = atan(ym/xm);
 elif xm > 0 && ym < 0:
+
     thetam = -atan(ym/xm);
 elif xm < 0 && ym > 0:
     thetam = pi-atan(ym/xm);
 elif xm < 0 && ym < 0:
     thetam = pi+atan(ym/xm);
 end
-y = double(8);
 f = 0;
 
 %% Non-dimensionalise variables
@@ -64,7 +63,8 @@ for e = 0.95:0.01:0.99
             y(5) = atan((r_i*sin(theta_j))/((1+r_i*cos(theta_j)))); %theta1
             y(2) = y(4)*cos(theta_j-y(5))-y(3)*y(8)*sin(theta_j-y(5)); %dr1
             y(6) = y(4)/y(1)*sin(theta_j - y(5))+y(3)*y(8)/y(1)*cos(theta_j-y(5)); %theta1'
-            [Y , dydf, te, ye, ie] = ode45(@statvec, simtime, y); % Integration + options for termination         
+            y_init = y(1:8);
+            [Y , ie, ye, te] = ode45(@statvec, simtime, y_init); % Integration + options for termination         
         end
     end
 end
