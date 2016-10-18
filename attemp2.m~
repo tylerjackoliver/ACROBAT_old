@@ -41,7 +41,6 @@ for i = 1:1:10;
         y(5) = atan((r_i*sin(theta_j))/((1+r_i*cos(theta_j)))); %theta1
         y(2) = y(4)*cos(theta_j-y(5))-y(3)*y(8)*sin(theta_j-y(5)); %dr1
         y(6) = y(4)/y(1)*sin(theta_j - y(5))+y(3)*y(8)/y(1)*cos(theta_j-y(5)); %theta1
-        yrecord = [y(1);y(2);y(3);y(4);y(5);y(6);y(7);y(8)];
         y_init = y(1:8);
         [t, y, te, ye, ie] = ode45(@statvec, [0 1], y_init, options);
         [x, y1] = pol2cart( y(3), y(8));
@@ -58,10 +57,10 @@ for i = 1:1:10;
         B = index1 < 6;
         C = ie(B);
         stabnumber = size(C);
-        stabarray = [stabarray; yrecord(1:8)];
+        stabarray = [stabarray; y_init(1:8)];
         index = find(ie==3);
-        if index == 1 & stabnumber == 1
-            ballisticescape = [ballisticescape; yrecord(1:8)];
+        if index == 1
+            ballisticescape = [ballisticescape; y_init(1:8)];
         end
     end
 end
@@ -90,11 +89,11 @@ for i = 1:1:10;
         Cb = ie(Bb);
         stabnumberb = size(Cb);
         if stabnumberb == 1;
-            stabarrayb = [stabarrayb; y_record];
+            stabarrayb = [stabarrayb; y_init(1:8)];
         end
         indexb = find(ie==3);
-        if indexb == 1 & stabnumberb == 1;
-            ballisticescapeb = [ballisticescapeb; y_record];
+        if indexb == 1 && stabnumberb == 1;
+            ballisticescapeb = [ballisticescapeb; y_record(1:8)];
         end
     end
 end
