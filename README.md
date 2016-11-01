@@ -20,6 +20,10 @@ The computation at full resolution - 354000 initial conditions - will take multi
 
 Implementation of geometric filters; point optimisation per mission criteria; connection to multi-swingby low-thrust trajectory optimiser (to follow).
 
+## Acknowledgements
+
+The software suite is based largely off of research undertaken by the following: Topputo, F.; Gomez, G.; Belbruno, E., and those cited by the above.
+
 ## Licenses
 
 All rights reserved. 
