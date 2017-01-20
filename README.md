@@ -1,4 +1,6 @@
-# ACROBAT - Ballistic Capture Orbit Analysis Tool
+# OLD VERSION: ACROBAT - Ballistic Capture Orbit Analysis Tool
+
+## Please Note: this version is old, and incorrect. It was meant as a 'proving ground' for the numerical integration. The new, working version will be pushed to master when complete.
 
 ## Using ACROBAT
 
